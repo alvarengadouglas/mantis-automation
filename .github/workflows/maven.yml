@@ -28,20 +28,6 @@ jobs:
     - name: Build with Maven
       run: mvn clean test --file pom.xml > test-output.log
 
-    - name: Extract Cucumber Report URL
-      run: |
-        REPORT_URL=$(grep -o "https://reports.cucumber.io/reports/[a-z0-9\-]*" test-output.log)
-        echo "REPORT_URL=$REPORT_URL" >> $GITHUB_ENV
-
-    - name: Save Cucumber Report URL as Artifact
-      run: echo "$REPORT_URL" > cucumber_report_url.txt
-
-    - name: Upload Cucumber Report URL Artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: cucumber-report-url
-        path: cucumber_report_url.txt
-
     - name: Upload Extent Report HTML
       uses: actions/upload-artifact@v3
       with:
