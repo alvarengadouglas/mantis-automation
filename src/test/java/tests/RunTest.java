@@ -9,8 +9,8 @@ import util.TestRule;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "classpath:features",
-        tags = "@run",
-        glue = {"classpath:steps"}
+        tags = "@smoke",
+        glue = {"steps", "util"}
 )
 public class RunTest {
 

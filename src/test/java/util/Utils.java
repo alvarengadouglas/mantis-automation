@@ -3,7 +3,6 @@ package util;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -23,7 +22,7 @@ public class Utils {
         System.setProperty("webdriver.chrome.driver", driverPath);
     }
 
-    static String getProperty(String property) {
+    public String getProperty(String property) {
         Properties props = new Properties();
         try {
             FileReader stagingPropsReader = new FileReader("src/test/resources/tests.properties");
@@ -37,13 +36,14 @@ public class Utils {
         return props.getProperty(property);
     }
 
-    static String takeScreenshot(WebDriver driver, String screenshotName) throws IOException {
+    static String takeScreenshot(WebDriver driver, String screenshotName) throws IOException, InterruptedException {
+        Thread.sleep(1000);
         TakesScreenshot ts = (TakesScreenshot) driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
-        String destination = System.getProperty("user.dir") + "/screenshots/" + screenshotName + ".png";
-        Files.createDirectories(Paths.get(System.getProperty("user.dir") + "/screenshots/"));
-        Files.copy(source.toPath(), Paths.get(destination));
-        return destination;
+        boolean runningOnServer = Boolean.parseBoolean(new Utils().getProperty("running-on-server"));
+        String directory = "target/Reports/" + screenshotName + ".png";
+        Files.copy(source.toPath(), Paths.get(directory));
+        return directory;
     }
 
 }
