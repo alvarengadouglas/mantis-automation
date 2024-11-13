@@ -43,7 +43,7 @@ public class Utils {
         boolean runningOnServer = Boolean.parseBoolean(new Utils().getProperty("running-on-server"));
         String currentDirectory;
         if (runningOnServer){
-            currentDirectory = System.getProperty("user.dir").replace("/mantis-automation", "");
+            currentDirectory = "";
         }else {
             currentDirectory = System.getProperty("user.dir");
         }
