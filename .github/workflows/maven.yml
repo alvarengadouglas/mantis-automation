@@ -26,10 +26,10 @@ jobs:
         ./chrome-install.sh
 
     - name: Build with Maven
-      run: mvn clean test --file pom.xml > test-output.log
+      run: mvn clean test --file pom.xml
 
     - name: Upload Extent Report HTML
       uses: actions/upload-artifact@v3
       with:
         name: extent-report-url
-        path: /target/Reports/*.html
+        path: /target/Reports/*.feature.html
