@@ -1,16 +1,8 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
-
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Java CI with Maven
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "develop" ]
   pull_request:
     branches: [ "main" ]
 
@@ -20,14 +12,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout do fonte
+      uses: actions/checkout@v2
+
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    - name:  Install Google Chrome # Using shell script to install Google Chrome
-      run:   |
-              chmod +x ./chrome-install.sh
-                          ./chrome-install.sh
+
+    - name:  Install Google Chrome
+      run: |
+        chmod +x ./chrome-install.sh
+        ./chrome-install.sh
+
     - name: Build with Maven
-      run: mvn test --file pom.xml
+      run: mvn clean test --file pom.xml > test-output.log
+
+    - name: Extract Cucumber Report URL
+      run: |
+        REPORT_URL=$(grep -o "https://reports.cucumber.io/reports/[a-z0-9\-]*" test-output.log)
+        echo "REPORT_URL=$REPORT_URL" >> $GITHUB_ENV
+
+    - name: Save Cucumber Report URL as Artifact
+      run: echo "$REPORT_URL" > cucumber_report_url.txt
+
+    - name: Upload Cucumber Report URL Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: cucumber-report-url
+        path: cucumber_report_url.txt
+
+    - name: Upload Extent Report HTML
+      uses: actions/upload-artifact@v3
+      with:
+        name: extent-report-url
+        path: /target/Reports/*.html
