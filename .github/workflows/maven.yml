@@ -28,7 +28,7 @@ jobs:
     - name: Build with Maven
       run: mvn clean test --file pom.xml
 
-    - name: Upload Extent Report HTML
+    - name: Upload Extent Report
       uses: actions/upload-artifact@v3
       with:
         name: extent-report
