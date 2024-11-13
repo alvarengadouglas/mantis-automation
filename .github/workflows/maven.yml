@@ -30,7 +30,7 @@ jobs:
 
     - name: ls
       run: |
-        ls src/resources && pwd
+        ls src/test/resources && pwd
 
     - name: Upload Extent Report
       uses: actions/upload-artifact@v3
