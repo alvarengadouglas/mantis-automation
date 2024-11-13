@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  selenium-build:
 
     runs-on: ubuntu-latest
 
@@ -25,12 +25,8 @@ jobs:
         chmod +x ./chrome-install.sh
         ./chrome-install.sh
 
-    - name: Build with Maven
+    - name: Build with Maven a Selenium test application
       run: mvn clean test --file pom.xml
-
-    - name: ls
-      run: |
-        chmod u+w target/Reports
 
     - name: Upload Extent Report HTML
       uses: actions/upload-artifact@v4
