@@ -30,13 +30,13 @@ public class Logs {
     }
 
     public void logPrintPass(WebDriver driver, String screenShotName) throws IOException, InterruptedException {
-        String imgPath = Utils.takeScreenshot(driver, screenShotName);
-        et.pass(MediaEntityBuilder.createScreenCaptureFromPath(imgPath).build());
+        Utils.takeScreenshot(driver, screenShotName);
+        et.pass(MediaEntityBuilder.createScreenCaptureFromPath("./" + screenShotName).build());
     }
 
     public void logPrintError(WebDriver driver, String screenshotName, Scenario scenario) throws IOException, Exception {
-        String imgPath = Utils.takeScreenshot(driver, screenshotName);
-        et.fail(MediaEntityBuilder.createScreenCaptureFromPath(imgPath).build());
+       Utils.takeScreenshot(driver, screenshotName);
+        et.fail(MediaEntityBuilder.createScreenCaptureFromPath("./" + screenshotName).build());
         throw new Exception("Falha no cenário: " + scenario.getName());
     }
     
