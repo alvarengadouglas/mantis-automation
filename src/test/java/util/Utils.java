@@ -41,16 +41,9 @@ public class Utils {
         TakesScreenshot ts = (TakesScreenshot) driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
         boolean runningOnServer = Boolean.parseBoolean(new Utils().getProperty("running-on-server"));
-        String directory;
-        if (runningOnServer){
-            directory = "target/Reports/" + screenshotName + ".png";
-        }else {
-            directory = System.getProperty("user.dir") + "/target/Reports/" + screenshotName + ".png";;
-        }
-
-        String destination = directory;
-        Files.copy(source.toPath(), Paths.get(destination));
-        return destination;
+        String directory = "target/Reports/" + screenshotName + ".png";
+        Files.copy(source.toPath(), Paths.get(directory));
+        return directory;
     }
 
 }

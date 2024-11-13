@@ -31,12 +31,12 @@ public class Logs {
 
     public void logPrintPass(WebDriver driver, String screenShotName) throws IOException, InterruptedException {
         Utils.takeScreenshot(driver, screenShotName);
-        et.pass(MediaEntityBuilder.createScreenCaptureFromPath("./" + screenShotName).build());
+        et.pass(MediaEntityBuilder.createScreenCaptureFromPath("./" + screenShotName + ".png").build());
     }
 
     public void logPrintError(WebDriver driver, String screenshotName, Scenario scenario) throws IOException, Exception {
        Utils.takeScreenshot(driver, screenshotName);
-        et.fail(MediaEntityBuilder.createScreenCaptureFromPath("./" + screenshotName).build());
+        et.fail(MediaEntityBuilder.createScreenCaptureFromPath("./" + screenshotName + ".png").build());
         throw new Exception("Falha no cenário: " + scenario.getName());
     }
     
