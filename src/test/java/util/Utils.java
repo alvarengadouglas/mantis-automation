@@ -40,15 +40,9 @@ public class Utils {
         Thread.sleep(1000);
         TakesScreenshot ts = (TakesScreenshot) driver;
         File source = ts.getScreenshotAs(OutputType.FILE);
-        boolean runningOnServer = Boolean.parseBoolean(new Utils().getProperty("running-on-server"));
-        String currentDirectory;
-        if (runningOnServer){
-            currentDirectory = "/home/runner/work/mantis-automation/mantis-automation";
-        }else {
-            currentDirectory = System.getProperty("user.dir");
-        }
+        String currentDirectory = System.getProperty("user.dir");
 
-        String destination = currentDirectory + "/src/test/resources/" + screenshotName + ".png";
+        String destination = currentDirectory + "/target/Reports/" + screenshotName + ".png";
         Files.createDirectories(Paths.get(System.getProperty("user.dir") + "/screenshots/"));
         Files.copy(source.toPath(), Paths.get(destination));
         return destination;

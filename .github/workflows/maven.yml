@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v4
       with:
         java-version: 1.8
 
@@ -32,9 +32,9 @@ jobs:
       run: |
         chmod u+w target/Reports
 
-    - name: Upload Extent Report
+    - name: Upload Extent Report HTML
       uses: actions/upload-artifact@v4
       if: always()
       with:
         name: extent-report
-        path: target/Reports/*.feature.html
+        path: target/Reports
