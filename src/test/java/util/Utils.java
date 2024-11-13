@@ -43,9 +43,9 @@ public class Utils {
         boolean runningOnServer = Boolean.parseBoolean(new Utils().getProperty("running-on-server"));
         String directory;
         if (runningOnServer){
-            directory = "target/Reports" + screenshotName + ".png";
+            directory = "target/Reports/" + screenshotName + ".png";
         }else {
-            directory = System.getProperty("user.dir") + "/target/Reports" + screenshotName + ".png";;
+            directory = System.getProperty("user.dir") + "/target/Reports/" + screenshotName + ".png";;
         }
 
         String destination = directory;
