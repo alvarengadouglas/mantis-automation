@@ -31,5 +31,5 @@ jobs:
     - name: Upload Extent Report HTML
       uses: actions/upload-artifact@v3
       with:
-        name: extent-report-url
+        name: extent-report
         path: /target/Reports/*.feature.html
